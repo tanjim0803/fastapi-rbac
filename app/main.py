@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from app.database.session import create_tables
+from app.api.routes import master_router
 
 
 @asynccontextmanager
@@ -14,6 +15,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-@app.get("/")
-def home():
-    return {"message": "Hello FastAPI!"}
+app.include_router(master_router)
