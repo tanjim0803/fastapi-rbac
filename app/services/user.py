@@ -13,7 +13,7 @@ class UserService:
 
         user = results.scalar_one_or_none()
 
-        return True if user else False
+        return user if user else False
 
     async def create_user(self, session: AsyncSession, user_data: CreateUserModel):
         user = await self.user_exists(session, user_data.email)
