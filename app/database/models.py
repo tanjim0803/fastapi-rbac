@@ -7,7 +7,7 @@ class User(SQLModel, table=True):
     __tablename__ = "users"
 
     id: uuid.UUID = Field(
-        default_factory=uuid.uuid4(), primary_key=True, nullable=False
+        default_factory=uuid.uuid4, primary_key=True, nullable=False
     )
     email: EmailStr
     username: str

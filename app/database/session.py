@@ -1,6 +1,8 @@
 from sqlmodel import SQLModel
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from app.config import db_settings
+from typing import Annotated
+from fastapi import Depends
 
 DATABASE_URL = db_settings.DATABASE_URL
 
@@ -20,3 +22,6 @@ async def get_session():
 
     async with AsyncSessionLocal() as session:
         yield session
+
+
+SessionDep = Annotated[AsyncSession, Depends(get_session)]
